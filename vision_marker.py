@@ -126,7 +126,7 @@ while(True ):
     # Capture img-by-img
     # ret,img=cap.read()
     # img  = cv2.imread('asdfgh.png',0)
-    img = cv2.imread("zxcvb.png", cv2.IMREAD_COLOR)
+    img = cv2.imread("zxcvbnm.png", cv2.IMREAD_COLOR)
     lYellow = np.array([20,100,100])
     uYellow = np.array([40,255,255])
     # th, im_th = cv2.threshold(img, 50, 255, cv2.THRESH_BINARY)
@@ -148,6 +148,7 @@ while(True ):
     cv2.imshow('img',img)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+    cv2.imwrite("plk.png",img)
 
 # # When everything done, release the capture
 cap.release()
