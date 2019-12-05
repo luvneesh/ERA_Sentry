@@ -7,7 +7,7 @@ def nothing(x):
     pass
 
 # read the experimental image
-img = cv2.imread('qwertyui.png', 0)
+img = cv2.imread('lol.png', 0)
 
 # create trackbar for canny edge detection threshold changes
 cv2.namedWindow('canny')

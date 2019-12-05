@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 
 # loading image
 #img0 = cv2.imread('SanFrancisco.jpg',)
-img0 = cv2.imread('qwerty.png',)
+img0 = cv2.imread('zxcvbnm.png',)
 
 # converting to gray scale
 gray = cv2.cvtColor(img0, cv2.COLOR_BGR2GRAY)

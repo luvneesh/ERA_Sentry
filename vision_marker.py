@@ -137,7 +137,7 @@ while(True ):
     # img=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     # _, img = cv2.threshold(img, 75, 255, cv2.THRESH_BINARY)
     #lists of ids and the corners beloning to each id
-    corners, ids, rejectedImgPoints = aruco.detectMarkers(img, aruco_dict)
+    corners, ids, rejectedImgPoints = aruco.detectMarkers(cimg, aruco_dict)
     # draw markers on farme
     img = aruco.drawDetectedMarkers(img, corners, (ids),  borderColor=(0, 255, 0))
     print(ids)
