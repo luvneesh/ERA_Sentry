@@ -126,18 +126,18 @@ while(True ):
     # Capture img-by-img
     # ret,img=cap.read()
     # img  = cv2.imread('asdfgh.png',0)
-    img = cv2.imread("zxcvbnm.png", cv2.IMREAD_COLOR)
-    lYellow = np.array([20,100,100])
-    uYellow = np.array([40,255,255])
-    # th, im_th = cv2.threshold(img, 50, 255, cv2.THRESH_BINARY)
+    img = cv2.imread("result.png", cv2.IMREAD_COLOR)
+    # lYellow = np.array([20,100,100])
+    # uYellow = np.array([40,255,255])
+    # # th, im_th = cv2.threshold(img, 50, 255, cv2.THRESH_BINARY)
 
-    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    # hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
-    mask = cv2.inRange(hsv, lYellow, uYellow)
+    # mask = cv2.inRange(hsv, lYellow, uYellow)
     # img=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     # _, img = cv2.threshold(img, 75, 255, cv2.THRESH_BINARY)
     #lists of ids and the corners beloning to each id
-    corners, ids, rejectedImgPoints = aruco.detectMarkers(255-mask, aruco_dict)
+    corners, ids, rejectedImgPoints = aruco.detectMarkers(img, aruco_dict)
     # draw markers on farme
     img = aruco.drawDetectedMarkers(img, corners, (ids),  borderColor=(0, 255, 0))
     print(ids)
