@@ -3,7 +3,7 @@ import numpy as np
 img = cv2.imread("trafnformed_w:o_hoe.png")
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 edges = cv2.Canny(gray, 26 , 96)
-lines = cv2.HoughLinesP(edges, 1, np.pi/180, 15, maxLineGap=50)
+lines = cv2.HoughLinesP(edges, 1, np.pi/180, 15, maxLineGap=100)
 print(lines[1])
 for line in lines:
 
@@ -15,4 +15,5 @@ cv2.imwrite("hoelines.png",img)
 cv2.imshow("linesEdges", edges)
 cv2.imshow("linesDetected", img)
 cv2.waitKey(0)
+
 cv2.destroyAllWindows()
