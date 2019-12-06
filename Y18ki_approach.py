@@ -114,41 +114,48 @@ aruco_dict.bytesList[42] = aruco.Dictionary_getByteListFromBits(mybits)
 mybits = np.array([[1,1,1,1,1],[1,0,1,0,1],[1,1,1,1,1],[1,0,1,0,1],[1,1,1,1,1]], dtype = np.uint8)
 aruco_dict.bytesList[43] = aruco.Dictionary_getByteListFromBits(mybits)
 
-# # save marker images
-# for i in range(len(aruco_dict.bytesList)):
-#     cv2.imwrite("custom_aruco_" + str(i) + ".png", aruco.drawMarker(aruco_dict, i, 128))
-
-# open video capture from (first) webcam
-# cap = cv2.VideoCapture("dcim.mp4")
-
-# img = cv2.imread('s1 vision markers_page-0002.jpg')
-
-# Capture img-by-img
-# ret,img=cap.read()
-# img  = cv2.imread('asdfgh.png',0)
 img = cv2.imread("result_.png", cv2.IMREAD_COLOR)
-# lYellow = np.array([20,100,100])
-# uYellow = np.array([40,255,255])
-# # th, im_th = cv2.threshold(img, 50, 255, cv2.THRESH_BINARY)
 
-# hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-
-# mask = cv2.inRange(hsv, lYellow, uYellow)
-# img=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-# _, img = cv2.threshold(img, 75, 255, cv2.THRESH_BINARY)
-#lists of ids and the corners beloning to each id
 corners, ids, rejectedImgPoints = aruco.detectMarkers(img, aruco_dict)
-print(corners[1])
-# draw markers on farme
-img = aruco.drawDetectedMarkers(img, corners, (ids),  borderColor=(0, 255, 0))
+
+bot_location_x = int(1920/2)
+bot_location_y = int(1080/2)
+
+aruco_distance = []
+nearest_top = 0
+nearest_left = 0
+nearest_right = 0
+nearest_bottom = 0
+corner=corners[1]
+# print(corner[0][:,0])
+for i, corner in enumerate(corners):
+    mid_x = np.sum(corner[0][:,0])/4
+    mid_y = np.sum(corner[0][:,1])/4
+    distance = ((mid_x-bot_location_x)**2+(mid_y-bot_location_y)**2)
+    aruco_distance.append(distance)
+    print(mid_x, bot_location_x)
+    if mid_x > bot_location_x:
+        print('e')
+        if aruco_distance[nearest_right] > distance:
+            nearest_right = i
+            print('updated')
+
+    if mid_x < bot_location_x:
+        if aruco_distance[nearest_left] > distance:
+            nearest_left = i
+
+    if mid_y > bot_location_y:
+        if aruco_distance[nearest_top] > distance:
+            nearest_top = i
+
+    if mid_y < bot_location_y:
+        if aruco_distance[nearest_bottom] > distance:
+            nearest_bottom = i
+
+
+    
 # print(ids)
 
-#     # resize img to show ecven on smaller screens
-#     img = cv2.resize(img, None, fx = 0.6, fy = .6)
-#     # Display the resulting img
-# cv2.imshow('img',img)
-cv2.imwrite("plk.png",img)
-
-# # # When everything done, release the capture
-# cap.release()
-# cv2.destroyAllWindows()
+img = aruco.drawDetectedMarkers(img, [corners[nearest_bottom], corners[nearest_left], corners[nearest_right], corners[nearest_top]], (ids[:4]),  borderColor=(0, 255, 0))
+cv2.circle(img, (bot_location_x, bot_location_y), 20, (0, 0, 255), thickness=-1)
+cv2.imwrite('y18.png', img)
