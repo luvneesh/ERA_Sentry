@@ -15,7 +15,7 @@ args = vars(ap.parse_args())
 # NOTE: using the 'eval' function is bad form, but for this example
 # let's just roll with it -- in future posts I'll show you how to
 # automatically determine the coordinates without pre-supplying them
-image = cv2.imread('hell1.png')
+image = cv2.imread('hell-0.png')
 pts_1 = np.array([(151, 373), (750, 268), (1693, 531), (1368, 1078)])
 pts_2 = np.array([(97,175), (769, 65), (1892, 379), (952, 1932)])
 pts_3 = np.array([(72, 145), (730, 34), (1766, 332), (968, 1078)])
